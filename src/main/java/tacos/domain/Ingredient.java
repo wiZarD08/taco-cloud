@@ -1,12 +1,18 @@
 package tacos.domain;
 
+import jakarta.persistence.Entity;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 
 @Data
+@Entity
 @AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class Ingredient {
+    @Id
     private String id;
     private String name;
     private Type type;

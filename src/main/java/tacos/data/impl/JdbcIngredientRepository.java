@@ -1,8 +1,7 @@
-package tacos.data;
+package tacos.data.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 import tacos.domain.Ingredient;
 
 import java.sql.ResultSet;
@@ -10,8 +9,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class JdbcIngredientRepository implements IngredientRepository {
+//@Repository
+public class JdbcIngredientRepository implements IngredientRepositoryWithoutData {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -27,7 +26,8 @@ public class JdbcIngredientRepository implements IngredientRepository {
 
     @Override
     public Optional<Ingredient> findById(String id) {
-        List<Ingredient> list = jdbcTemplate.query("select id, name, type from Ingredient where id=?", this::mapRowToIngredient, id);
+        List<Ingredient> list = jdbcTemplate.query("select id, name, type from Ingredient where id=?",
+                this::mapRowToIngredient, id);
         return (list.isEmpty()) ? Optional.empty() : Optional.of(list.get(0));
     }
 

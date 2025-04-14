@@ -4,6 +4,13 @@
 <head>
     <title>Taco Cloud</title>
     <link rel="stylesheet" th:href="@{/styles.css}" />
+    <style>
+        .validationError {
+            color: red;
+            font-size: 0.8em;
+            margin-left: 5px;
+        }
+    </style>
 </head>
 <body>
 <h1>Design your taco!</h1>
@@ -43,6 +50,14 @@
     <div>
         <h3>Name your taco creation:</h3>
         <input type="text" th:field="*{name}"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('name')}"
+              th:errors="*{name}">Name Error</span>
+        <br/><br/>
+        <div th:if="${#fields.hasErrors('ingredients')}">
+            <span class="validationError"
+                th:errors="*{ingredients}">Ingredients Error</span>
+        </div>
         <br/>
         <button>Submit Your Taco</button>
     </div>
